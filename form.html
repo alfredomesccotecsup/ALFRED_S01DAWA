@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convertidor de Moneda</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h1 {
+      color: #333;
+      margin-top: 0;
+    }
+    p {
+      color: #666;
+    }
+    input[type="number"] {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Convertidor de Moneda</h1>
+    <p>Este formulario convierte dólares a la moneda que elijas utilizando una tasa de cambio fija.</p>
+    <form id="conversion-form">
+      <label for="dollars">Cantidad en dólares:</label>
+      <input type="number" name="dollars" id="dollars" step="0.01" required>
+      <label for="currency">Elige la moneda:</label>
+      <select name="currency" id="currency">
+        <option value="euros">Euros</option>
+        <option value="soles">Soles</option>
+        <option value="yen">Yen Japonés</option>
+        <option value="libras">Libras Esterlinas</option>
+        <option value="yuan">Yuan Chino</option>
+      </select>
+      <button type="button" onclick="convertCurrency()">Convertir</button>
+    </form>
+    <div class="result" id="result"></div>
+  </div>
+  <script>
+    function convertCurrency() {
+      const dollarsInput = document.getElementById('dollars');
+      const currencySelect = document.getElementById('currency');
+      const resultDiv = document.getElementById('result');
+      
+      const dollars = parseFloat(dollarsInput.value);
+      const selectedCurrency = currencySelect.value;
+      
+      if (isNaN(dollars)) {
+        resultDiv.innerHTML = '<p>Por favor, introduce una cantidad válida en dólares.</p>';
+      } else {
+        let convertedAmount;
+        let currencyName;
+
+        if (selectedCurrency === 'euros') {
+          convertedAmount = (dollars * 0.85).toFixed(2);
+          currencyName = 'euros';
+        } else if (selectedCurrency === 'soles') {
+          convertedAmount = (dollars * 3.95).toFixed(2);
+          currencyName = 'soles';
+        } else if (selectedCurrency === 'yen') {
+          convertedAmount = (dollars * 109.77).toFixed(2);
+          currencyName = 'yenes';
+        } else if (selectedCurrency === 'libras') {
+          convertedAmount = (dollars * 0.73).toFixed(2);
+          currencyName = 'libras esterlinas';
+        } else if (selectedCurrency === 'yuan') {
+          convertedAmount = (dollars * 6.47).toFixed(2);
+          currencyName = 'yuanes chinos';
+        }
+        
+        resultDiv.innerHTML = `<p>${dollars} dólares son aproximadamente ${convertedAmount} ${currencyName}.</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
